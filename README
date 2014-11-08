@@ -48,3 +48,8 @@ CREATE TABLE `urllist` (
 Not perfect but it works
 ask me i will help you to setup an improve this for you
 
+
+How to use:
+Install all requierments and start both python scripts crawler.py and analyser.py
+now you can start start.py to add the first page to crawl. Now the crawler run independently. You should install
+supervisord to hold the analyser and crawler alive.

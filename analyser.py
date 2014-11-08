@@ -125,8 +125,8 @@ while True:
                 else:
                     internalLinks += 1
 
-                if -1 == rightDomain.find("renego"):
-                    continue
+                #if -1 == rightDomain.find("yourdomainname"):
+                #    continue
                 #print "next " + rightDomain
 
                 if nofollow == 0:

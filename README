@@ -1,0 +1,50 @@
+Requirements:
+nltk
+beanstalkc
+BeautifulSoup
+MySQLdb
+pyquery
+json
+
+Database Settings
+CREATE TABLE `urllist` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `crc_url` bigint(11) NOT NULL,
+  `url` text COLLATE utf8mb4_unicode_ci,
+  `content` longtext COLLATE utf8mb4_unicode_ci,
+  `domain` varchar(155) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `http_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `total_time` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `namelookup_time` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `connect_time` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pretransfer_time` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect_time` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect_count` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `size_download` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `header_size` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content_length_download` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `content_type` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `response_code` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `speed_download` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `filetime` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `http_connectcode` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `os_errno` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title_lenght` int(11) DEFAULT NULL,
+  `description_lenght` int(11) DEFAULT NULL,
+  `code_text_ratio` int(11) DEFAULT NULL,
+  `canonical` text COLLATE utf8mb4_unicode_ci,
+  `intern_links` int(11) DEFAULT NULL,
+  `extern_links` int(11) DEFAULT NULL,
+  `links_count` int(11) DEFAULT NULL,
+  `robot_tag` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword_density` longtext COLLATE utf8mb4_unicode_ci,
+  `nofollow_links` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `crc_url` (`crc_url`,`url`(191))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
+
+Not perfect but it works
+ask me i will help you to setup an improve this for you
+

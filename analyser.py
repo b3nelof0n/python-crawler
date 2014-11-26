@@ -68,7 +68,7 @@ while True:
         print "catch job" + str(job.body)
         db = MySQLdb.connect(host="localhost",user="root",passwd="xxxx",init_command='SET NAMES utf8mb4',use_unicode=True)
         cursor = db.cursor()
-        sql = "SELECT id,content, domain FROM  spider.urllist WHERE id = "+job.body+" LIMIT 1"
+        sql = "SELECT id,content,domain,url FROM  spider.urllist WHERE id = "+job.body+" LIMIT 1"
         cursor.execute(sql)
 
         followLinks     = 0
@@ -77,7 +77,7 @@ while True:
         internalLinks   = 0
         nofollow = 0
 
-        for (id, content, domain) in cursor:
+        for (id, content, domain,url) in cursor:
             print "found " +  str(id)
             try:
                 xml = PyQuery(content)
@@ -132,7 +132,7 @@ while True:
                 if nofollow == 0:
                     nofollowLinks = internalLinks + externLinks + nofollowLinks
                     continue
-                jsonobject = json.dumps({"domain": rightDomain})
+                jsonobject = json.dumps({"domain": rightDomain,"parent_domain": url})
                 beanstalkSecond = beanstalkc.Connection(host='localhost', port=11300)
                 beanstalkSecond.use("url_list")
                 beanstalkSecond.put(jsonobject)

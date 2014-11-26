@@ -63,6 +63,7 @@ while True:
         # print (job.body)
         content = json.loads(job.body)
         url = content["domain"].encode("utf8")
+        parent_domain = content["parent_domain"].encode("utf8")
         if(-1 != job.body.find("#")):
             continue
 
@@ -72,8 +73,13 @@ while True:
                      use_unicode=True)
 
         cursor = db.cursor()
-        sql = "SELECT id FROM spider.urllist WHERE crc_url = "+ str(binascii.crc32(url)) + " AND url = '"+ url +"' LIMIT 1"
-        cursor.execute(sql)
+        cursor.execute(""" SELECT id FROM spider.urllist WHERE crc_url = %s AND url = %s
+            LIMIT 1
+             """,(
+             str(binascii.crc32(url))
+            ,url
+
+            ))
         for (id) in cursor:
             if id > 0:
                 skip = 1
@@ -146,6 +152,21 @@ while True:
                    , curinfo['speed_download']
                    , curinfo['filetime']
                    , curinfo['http_connectcode']
+                   )
+            )
+            db.commit()
+            #parent_domain
+            cursor.execute("""INSERT INTO spider.link_list (
+                  `crc_root_domain`
+                , `root_domain`
+                , `crc_parent_domain`
+                , `parent_domain`
+            )
+                    VALUES (%s,%s,%s,%s)""",
+                (    binascii.crc32(url)
+                   , url
+                   , binascii.crc32(parent_domain)
+                   , parent_domain
                    )
             )
             db.commit()
